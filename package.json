@@ -1,0 +1,15 @@
+{
+  "name": "send_mass_email",
+  "version": "1.0.0",
+  "description": "Send mass emails for HMA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.104.0"
+  }
+}
