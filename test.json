@@ -1,0 +1,10 @@
+{
+  "recipients": [ {"emailAddress": "ieatkillerbees@gmail.com", "name": "Samantha"}],
+  "templateName": "volunteer_new_email",
+  "templateData": {
+    "abstract": {
+      "author": "Joe Schmo",
+      "url": "http://qux.bux"
+    }
+  }
+}

@@ -10,7 +10,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.104.0"
+    "aws-sdk": "^2.104.0",
+    "lambda-local": "^1.4.2"
   },
   "devDependencies": {
     "ava": "^0.22.0"
