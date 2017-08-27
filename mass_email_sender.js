@@ -5,6 +5,7 @@ function MassEmailSender(recipients, templateName, templateData) {
     this.recipients = recipients;       // An array of recipient objects
     this.templateName = templateName;   // The name of an outbound email template
     this.templateData = templateData;   // A map of k/v pairs to pass in to the template
+    this.alreadySent = [];
 }
 
 MassEmailSender.prototype.getPayloadForRecipient = function getPayloadForRecipient(recipient, templateName, templateData) {
@@ -19,6 +20,14 @@ MassEmailSender.prototype.getPayloadForRecipient = function getPayloadForRecipie
     };
 };
 
+MassEmailSender.prototype.isAllowedEmail = function isAllowedEmail(emailAddress) {
+    if (this.alreadySent.indexOf(emailAddress) === -1) {
+        return false;
+    }
+    this.alreadySent.push(emailAddress);
+    return true;
+};
+
 
 MassEmailSender.prototype.send = function send(callback)
 {
@@ -26,6 +35,9 @@ MassEmailSender.prototype.send = function send(callback)
 
     for (var i=0; i<this.recipients.length; i++) {
         var recipient = this.recipients[i];
+        if (!this.isAllowedEmail(recipient.emailAddress)) {
+            continue;
+        }
         var payload = this.getPayloadForRecipient(recipient, this.templateName, this.templateData);
 
         lambda.invoke(payload, function (error, result) {
