@@ -11,9 +11,10 @@
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.104.0",
-    "lambda-local": "^1.4.2"
+    "dotenv": "^4.0.0"
   },
   "devDependencies": {
-    "ava": "^0.22.0"
+    "ava": "^0.22.0",
+    "lambda-local": "^1.4.2"
   }
 }

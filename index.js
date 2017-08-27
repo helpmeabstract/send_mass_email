@@ -13,7 +13,7 @@ exports.handler = function (event, context) {
     try {
         validateEvent(event.recipients, event.templateName, event.templateData);
 
-        (new MassEmailSender(recipients, templateName, templateData)).send(function (error, result) {
+        (new MassEmailSender(event.recipients, event.templateName, event.templateData)).send(function (error, result) {
             if (error) context.fail(error);
             context.succeed(result);
         });

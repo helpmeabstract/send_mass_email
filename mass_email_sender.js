@@ -1,3 +1,4 @@
+require('dotenv').config();
 var Lambda = require('aws-sdk').Lambda;
 
 function MassEmailSender(recipients, templateName, templateData) {
@@ -10,11 +11,11 @@ MassEmailSender.prototype.getPayloadForRecipient = function getPayloadForRecipie
     return {
         FunctionName: process.env.AWS_LAMBDA_FUNCTION,
         InvocationType: process.env.AWS_LAMBDA_INVOCATION_TYPE,
-        Payload: new Buffer(JSON.stringify({
+        Payload: JSON.stringify({
             recipient: recipient,
             templateName: templateName,
             templateData: templateData
-        }))
+        })
     };
 };
 
@@ -25,7 +26,7 @@ MassEmailSender.prototype.send = function send(callback)
 
     for (var i=0; i<this.recipients.length; i++) {
         var recipient = this.recipients[i];
-        var payload = this.getPayloadForRecipient(recipient, this.template, this.templateData);
+        var payload = this.getPayloadForRecipient(recipient, this.templateName, this.templateData);
 
         lambda.invoke(payload, function (error, result) {
             if (error) {
